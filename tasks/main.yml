@@ -1,0 +1,66 @@
+---
+- name: Show IBM Spectrum Protect Client URL
+  debug:
+    msg: "IBM Spectrum Protect Client URL: {{ isp_client_download_url }}"
+
+- name: Make sure temporary installation directory exists
+  file:
+    state: directory
+    path: "{{ isp_client_installer_local_dir }}"
+    mode: '0770'
+
+- name: Download IBM Spectrum Protect Client
+  get_url:
+    url: "{{ isp_client_download_url }}"
+    dest: "{{ isp_client_installer_local_path }}"
+    mode: "0554"
+
+- name: Extact IBM Spectrum Protect Client installer files
+  unarchive:
+    src: "{{ isp_client_installer_local_path }}"
+    dest: "{{ isp_client_installer_local_dir }}"
+    remote_src: yes
+
+- name: Locate gsk* RPMs
+  find:
+    paths: "{{ isp_client_installer_local_dir }}"
+    patterns: "gskcrypt64-*.rpm,gskssl64-*.rpm"
+  register: find_output
+
+- name: Set gsk* RPMs paths
+  set_fact:
+    gsk_rpms: "{{ find_output.files | map(attribute='path') | list }}"
+
+- name: Install gsk* RPMs
+  yum:
+    name: "{{ gsk_rpms }}"
+    disable_gpg_check: true
+    state: present
+
+- name: Install IBM Spectrum Protect Client
+  yum:
+    name:
+      - "{{ isp_client_installer_local_dir }}/TIVsm-API64.x86_64.rpm"
+      - "{{ isp_client_installer_local_dir }}/TIVsm-BA.x86_64.rpm"
+    disable_gpg_check: true
+    state: present
+
+- name: Update dsm.opt file
+  lineinfile:
+    dest: "{{ isp_dsmopt_path }}"
+    regexp: '^servername\s+'
+    line: "servername\t{{ isp_dsmopt_servername }}"
+    create: true
+    state: present
+
+- name: Update dsm.sys file
+  lineinfile:
+    dest: "{{ isp_dsmsys_path }}"
+    regexp: '^{{ item.key }}\s+'
+    line: "{{ item.key }}\t{{ item.value }}"
+    create: true
+    state: present
+  loop:
+    - { key: "servername", value: "{{ isp_dsmsys_servername }}" }
+    - { key: "tcpport", value: "{{ isp_dsmsys_tcpport }}" }
+    - { key: "tcpserveraddress", value: "{{ isp_dsmsys_tcpserveraddress }}" }
