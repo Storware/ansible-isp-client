@@ -1,6 +1,6 @@
 ---
 isp_client_version: "8.1.12.0"
-isp_short_version: "{{ isp_server_version | regex_replace('([0-9]+)[.]([0-9]+)[.]([0-9]+).*', 'v\\1r\\2') }}"
+isp_short_version: "{{ isp_client_version | regex_replace('([0-9]+)[.]([0-9]+)[.]([0-9]+).*', 'v\\1r\\2') }}"
 isp_client_short_version: "{{ isp_client_version | regex_replace('([0-9]+)[.]([0-9]+)[.]([0-9]+).*', 'v\\1\\2\\3') }}"
 isp_client_installer_filename: "{{ isp_client_version }}-TIV-TSMBAC-LinuxX86.tar"
 isp_base_download_url: "http://ftp.software.ibm.com/storage/tivoli-storage-management/maintenance"
