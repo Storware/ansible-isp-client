@@ -62,5 +62,10 @@
     state: present
   loop:
     - { key: "servername", value: "{{ isp_dsmsys_servername }}" }
-    - { key: "tcpport", value: "{{ isp_dsmsys_tcpport }}" }
+    - { key: "nodename", value: "{{ isp_dsmsys_nodename }}" }
     - { key: "tcpserveraddress", value: "{{ isp_dsmsys_tcpserveraddress }}" }
+    - { key: "tcpport", value: "{{ isp_dsmsys_tcpport }}" }
+    - { key: "tcpadminport", value: "{{ isp_dsmsys_tcpadminport }}" }
+    - { key: "commmethod", value: "{{ isp_dsmsys_commmethod }}" }
+    - { key: "ssl", value: "{{ isp_dsmsys_ssl }}" }
+    - { key: "passwordaccess", value: "{{ isp_dsmsys_passwordaccess }}" }
