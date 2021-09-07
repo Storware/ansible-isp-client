@@ -1,4 +1,11 @@
 ---
+- name: Gather the package facts
+  package_facts:
+    manager: auto
+
+- set_fact:
+    kodo_endpoints_installed: "{{ 'kodo-for-endpoints' in ansible_facts.packages }}"
+
 - name: Show IBM Spectrum Protect Client URL
   debug:
     msg: "IBM Spectrum Protect Client URL: {{ isp_client_download_url }}"
@@ -52,6 +59,7 @@
     line: "servername\t{{ isp_dsmopt_servername }}"
     create: true
     state: present
+  when: not kodo_endpoints_installed
 
 - name: Update dsm.sys file
   lineinfile:
@@ -64,3 +72,4 @@
     - { key: "servername", value: "{{ isp_dsmsys_servername }}" }
     - { key: "tcpserveraddress", value: "{{ isp_dsmsys_tcpserveraddress }}" }
     - { key: "tcpport", value: "{{ isp_dsmsys_tcpport }}" }
+  when: not kodo_endpoints_installed
