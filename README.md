@@ -1,4 +1,4 @@
-Role Name
+IBM Spectrum Protect Client
 =========
 
 This role deploys IBM Spectrum Protect client to be used by
