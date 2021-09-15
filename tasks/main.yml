@@ -16,16 +16,16 @@
     path: "{{ isp_client_installer_local_dir }}"
     mode: '0770'
 
+- name: Install tar
+  yum:
+    name: tar
+    state: present
+
 - name: Download IBM Spectrum Protect Client
   get_url:
     url: "{{ isp_client_download_url }}"
     dest: "{{ isp_client_installer_local_path }}"
     mode: "0554"
-
-- name: Install tar
-  yum:
-    name: tar
-    state: present
 
 - name: Extact IBM Spectrum Protect Client installer files
   unarchive:
