@@ -24,14 +24,10 @@ isp_client_installer_local_path: "{{ isp_client_installer_local_dir }}/{{ isp_cl
 isp_dir: "/opt/tivoli/tsm"
 isp_dsmopt_path: "{{ isp_dir }}/client/ba/bin/dsm.opt"
 isp_dsmsys_path: "{{ isp_dir }}/client/ba/bin/dsm.sys"
-isp_dsmopt_servername: "isp"
-isp_dsmsys_servername: "{{ isp_dsmopt_servername }}"
-isp_dsmsys_tcpserveraddress: "localhost"
-isp_dsmsys_tcpport: "1500"
-isp_dsmsys_tcpadminport: "1503"
-isp_dsmsys_commmethod: "tcpip"
-isp_dsmsys_ssl: "yes"
-isp_dsmsys_passwordaccess: "generate"
+isp_servername: "isp"
+isp_tcpserveraddress: "localhost"
+isp_port: 1500
+isp_admin_port: 1502
 ```
 
 Key variables:
@@ -43,14 +39,10 @@ Key variables:
 * `isp_dir`- path where ISP client is going to be installed
 * `isp_dsmopt_path` - path to the `dsm.opt` file
 * `isp_dsmsys_path` - path to the `dsm.sys` file
-* `isp_dsmopt_servername` - name of the server in `dsm.opt` file
-* `isp_dsmsys_servername` - name of the server in `dsm.sys` file
-* `isp_dsmsys_tcpserveraddress` - address of the ISP server
-* `isp_dsmsys_tcpport` - port of the ISP server
-* `isp_dsmsys_tcpadminport`- administrative port of the ISP server
-* `isp_dsmsys_commmethod` - connection method to be used to connect to the ISP server
-* `isp_dsmsys_ssl` - if client will use SSL to connect to the ISP server
-* `isp_dsmsys_passwordaccess` - authentication option for the client
+* `isp_servername` - name of the server in `dsm.opt` and `dsm.sys` files
+* `isp_tcpserveraddress` - address of the ISP server
+* `isp_tcpport` - port of the ISP server
+* `isp_tcpadminport`- administrative port of the ISP server
 
 Dependencies
 ------------

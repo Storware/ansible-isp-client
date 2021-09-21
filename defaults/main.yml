@@ -10,11 +10,7 @@ isp_client_installer_local_path: "{{ isp_client_installer_local_dir }}/{{ isp_cl
 isp_dir: "/opt/tivoli/tsm"
 isp_dsmopt_path: "{{ isp_dir }}/client/ba/bin/dsm.opt"
 isp_dsmsys_path: "{{ isp_dir }}/client/ba/bin/dsm.sys"
-isp_dsmopt_servername: "isp"
-isp_dsmsys_servername: "{{ isp_dsmopt_servername }}"
-isp_dsmsys_tcpserveraddress: "localhost"
-isp_dsmsys_tcpport: "1500"
-isp_dsmsys_tcpadminport: "1503"
-isp_dsmsys_commmethod: "tcpip"
-isp_dsmsys_ssl: "yes"
-isp_dsmsys_passwordaccess: "generate"
+isp_servername: "isp"
+isp_tcpserveraddress: "localhost"
+isp_port: 1500
+isp_admin_port: 1502

@@ -61,7 +61,7 @@
   lineinfile:
     dest: "{{ isp_dsmopt_path }}"
     regexp: '^servername\s+'
-    line: "servername\t{{ isp_dsmopt_servername }}"
+    line: "servername\t{{ isp_servername }}"
     create: true
     state: present
   when: not kodo_endpoints_installed
@@ -74,7 +74,8 @@
     create: true
     state: present
   loop:
-    - { key: "servername", value: "{{ isp_dsmsys_servername }}" }
-    - { key: "tcpserveraddress", value: "{{ isp_dsmsys_tcpserveraddress }}" }
-    - { key: "tcpport", value: "{{ isp_dsmsys_tcpport }}" }
+    - { key: "servername", value: "{{ isp_servername }}" }
+    - { key: "tcpserveraddress", value: "{{ isp_tcpserveraddress }}" }
+    - { key: "tcpport", value: "{{ isp_port }}" }
+    - { key: "tcpadminport", value: "{{ isp_admin_port }}" }
   when: not kodo_endpoints_installed
